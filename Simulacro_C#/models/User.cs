@@ -30,6 +30,11 @@ namespace Simulacro_C_.models
             Address = address;
         }
 
+        public string? GetName()
+        {
+            return Name;
+        }
+
         //Show details
         protected void ShowDetails()
         {

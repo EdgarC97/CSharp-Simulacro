@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Simulacro_C_.models
 {
-    public class AdministratorApp
+    public  static class AdministratorApp
     {
         //Lista de usuarios
         public static List<User> Users = new List<User>();
@@ -55,7 +55,7 @@ namespace Simulacro_C_.models
         {
             new Vehicle(
             8900, "AHN-333", "Car", "951-357",
-            "582-632-555",5)
+            "582-632-555",5,Drivers.FirstOrDefault())
         };
 
         //Methods
@@ -116,6 +116,105 @@ namespace Simulacro_C_.models
         public static List<Driver> ShowDriversWithA2(List<Driver> Drivers)
         {
             return Drivers.Where(d => d.LicenseCategory?.Equals("A2", StringComparison.OrdinalIgnoreCase) == true).ToList();
+        }
+
+        //Metodo para agregar un vehiculo
+        public static void AddEmployee(Vehicle vehicle)
+        {
+            // Validar el objeto Employee
+            Validator.ValidateVehicle(vehicle);
+
+            // Agregar el libro a la colección
+            Vehicles.Add(vehicle);
+        }
+
+        public static void AddVehicle(Vehicle vehicle)
+        {
+            // Validar el objeto Vehicle
+            Validator.ValidateVehicle(vehicle);
+
+            // Agregar el vehículo a la colección
+            Vehicles.Add(vehicle);
+        }
+
+        //Agregar vehiculo : Este método permitirá agregar un vehiculo a la lista de vehiculos.
+        public static void AddVehicleFromUserInput()
+        {
+            Console.Clear();
+            Console.WriteLine("\n=== Agregar Vehiculo ===");
+
+            int id = Validator.GetValidIdFromUserInput();
+            string plate = Validator.GetValidPlateFromUserInput();
+            string type = Validator.GetValidTypeFromUserInput();
+            string engineNumber = Validator.GetValidEngineNumberFromUserInput();
+            string serialNumber = Validator.GetValidSerialNumberFromUserInput();
+            byte peopleCapacity = Validator.GetValidPeopleCapacityFromUserInput();
+            Driver owner = GetValidDriverFromUserInput();
+
+            // Creamos un nuevo vehículo con los datos validados
+            Vehicle newVehicle = new Vehicle(id, plate, type, engineNumber, serialNumber, peopleCapacity, owner);
+
+            // Agregamos el vehículo a la lista si pasa las validaciones
+            AddVehicle(newVehicle);
+            Console.WriteLine("Vehículo agregado exitosamente.");
+
+            // Asignamos el vehículo al conductor
+            owner.AssignVehicle(newVehicle);
+            Console.WriteLine($"Vehículo asignado al conductor {owner.GetName()}.");
+        }
+        private static Driver GetValidDriverFromUserInput()
+        {
+            while (true)
+            {
+                Console.Write("Nombre del conductor: ");
+                string driverName = Console.ReadLine() ?? "";
+                Driver? driver = Drivers.FirstOrDefault(d => d.GetName().Equals(driverName, StringComparison.OrdinalIgnoreCase));
+                if (driver != null)
+                {
+                    return driver;
+                }
+                Console.WriteLine("Conductor no encontrado. Por favor, intente de nuevo.");
+            }
+        }
+        private static string GetValidVehicleTypeFromUserInput()
+        {
+            while (true)
+            {
+                Console.WriteLine("Tipos de vehículos permitidos:");
+                foreach (var vehicleType in Vehicle.AllowedVehicles)
+                {
+                    Console.WriteLine($"- {vehicleType}");
+                }
+                Console.Write("Ingrese el tipo de vehículo: ");
+                string type = Console.ReadLine() ?? "";
+                if (Vehicle.AllowedVehicles.Contains(type, StringComparer.OrdinalIgnoreCase))
+                {
+                    return type;
+                }
+                Console.WriteLine("Tipo de vehículo no válido. Por favor, elija uno de la lista.");
+            }
+        }
+
+        private static byte GetValidPeopleCapacityForVehicleType(string vehicleType)
+        {
+            int maxCapacity = vehicleType.ToLower() switch
+            {
+                "moto" => 2,
+                "carro" => 5,
+                "camioneta" => 8,
+                "microbus" => 30,
+                _ => throw new ArgumentException("Tipo de vehículo no válido")
+            };
+
+            while (true)
+            {
+                Console.Write($"Capacidad (máximo {maxCapacity} para {vehicleType}): ");
+                if (byte.TryParse(Console.ReadLine(), out byte capacity) && capacity > 0 && capacity <= maxCapacity)
+                {
+                    return capacity;
+                }
+                Console.WriteLine($"Capacidad no válida. Debe ser un número entre 1 y {maxCapacity}.");
+            }
         }
     }
 }

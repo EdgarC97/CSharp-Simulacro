@@ -16,7 +16,7 @@ namespace Simulacro_C_.models
         public Driver? Owner { get; set; }
 
         //Constructor
-        public Vehicle(int id, string plate, string type, string engineNumber, string serialNumber, byte peopleCapacity)
+        public Vehicle(int id, string plate, string type, string engineNumber, string serialNumber, byte peopleCapacity, Driver? owner)
         {
             Id = id;
             Plate = plate;
@@ -24,12 +24,16 @@ namespace Simulacro_C_.models
             EngineNumber = engineNumber;
             SerialNumber = serialNumber;
             PeopleCapacity = peopleCapacity;
+            Owner = owner;
         }
 
-        //DeleteVehicle
-        public void DeleteVehicle()
+        // Lista de vehiculos permitidos
+        public static readonly List<string> AllowedVehicles = new List<string>
         {
-            // Logic to delete the vehicle from the database or storage
-        }
+            "Moto",
+            "Carro",
+            "Camioneta",
+            "Microbus"
+        };
     }
 }

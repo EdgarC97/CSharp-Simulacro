@@ -12,11 +12,18 @@ namespace Simulacro_C_.models
         public int DrivingExperience { get; set; }
 
         //Constructor
-        public Driver(string name, string lastName, string typeDocument, string identificationNumber, DateOnly birthday, string email, string phoneNumber, string address,string licenseNumber, string licenseCategory, int drivingExperience) : base (name,lastName,typeDocument, identificationNumber, birthday, email, phoneNumber, address)
+        public Driver(string name, string lastName, string typeDocument, string identificationNumber, DateOnly birthday, string email, string phoneNumber, string address, string licenseNumber, string licenseCategory, int drivingExperience) : base(name, lastName, typeDocument, identificationNumber, birthday, email, phoneNumber, address)
         {
             LicenseNumnber = licenseNumber;
             LicenseCategory = licenseCategory;
             DrivingExperience = drivingExperience;
+        }
+
+        public List<Vehicle> AssignedVehicles { get; set; } = new List<Vehicle>();
+
+        public void AssignVehicle(Vehicle vehicle)
+        {
+            AssignedVehicles.Add(vehicle);
         }
 
         //UpdateLicenseCategory

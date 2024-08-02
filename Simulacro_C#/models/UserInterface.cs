@@ -22,7 +22,8 @@ namespace Simulacro_C_.models
                 Console.WriteLine("4. Ordenar conductores por su expereriencia");
                 Console.WriteLine("5. Encontrar clientes con metodo de pago: Tarjeta de credito");
                 Console.WriteLine("6. Listar conductores con licencia de categoria : A2");
-                Console.WriteLine("7. Salir");
+                Console.WriteLine("7. Agregar un vehiculo");
+                Console.WriteLine("8. Salir");
                 Console.Write("Seleccione una opción: ");
 
                 // Leo la opción ingresada por el usuario y valida que sea un número
@@ -70,7 +71,7 @@ namespace Simulacro_C_.models
                             Console.WriteLine("\n=== Conductores ordenados por experiencia descendente ===\n");
                             Console.WriteLine($"{"Nombre",-10}|{"Apellido",-10}|{"Tipo Doc.",-12}|{"Número Doc.",-12}|{"Cumpleaños",-12}|{"Email",-30}|{"Teléfono",-12}|{"Direccion",-20}|{"Num de licencia",-15}|{"Tipo de licencia",-17}|{"Experiencia(años)",-17}|");
                             Console.WriteLine(new string('-', 178));
-                            
+
                             foreach (var driver in driversOrderedByExpDesc)
                             {
                                 driver.GetDetails();
@@ -99,8 +100,10 @@ namespace Simulacro_C_.models
                                 driver.GetDetails();
                             }
                             break;
-
                         case 7:
+                            AdministratorApp.AddVehicleFromUserInput();
+                            break;
+                        case 8:
                             exit = true; // Establezco la bandera exit a true para salir del bucle
                             Console.WriteLine("Gracias por usar el Sistema de Gestión de Escuela. ¡Hasta luego!");
                             break;
