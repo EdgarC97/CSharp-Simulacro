@@ -23,5 +23,11 @@ namespace Simulacro_C_.models
             MembershipLevel = "Gold";
         }
 
+        //// Muestra los detalles del cliente en formato tabular
+        public override void GetDetails()
+        {
+            Console.WriteLine($"{Name,-10}|{LastName,-10}|{TypeDocument,-12}|{IdentificationNumber,-12}|{Email,-30}|{PhoneNumber,-12}||{MembershipLevel,-12}|{PreferrePaymentMethod,-12}|");
+        }
+
     }
 }

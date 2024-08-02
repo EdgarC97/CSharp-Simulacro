@@ -33,15 +33,12 @@ namespace Simulacro_C_.models
         //Show details
         protected void ShowDetails()
         {
-            Console.WriteLine($"Id: {Id}");
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"Last Name: {LastName}");
-            Console.WriteLine($"Type Document: {TypeDocument}");
-            Console.WriteLine($"Identification Number: {IdentificationNumber}");
-            Console.WriteLine($"Birthday: {Birthdate.ToString("yyyy-MM-dd")}");
-            Console.WriteLine($"Email: {Email}");
-            Console.WriteLine($"Phone Number: {PhoneNumber}");
-            Console.WriteLine($"Address: {Address}");
+            Console.WriteLine($"\nName: {Name}\nLast Name: {LastName}\nDocument Type: {TypeDocument}\nDocument Number: {IdentificationNumber}\nBirthdate: {Birthdate}\nEmail Address: {Email}\nPhone Number: {PhoneNumber}\nAddress: {Address}");
+        }
+        //Obtener details
+        public virtual void GetDetails()
+        {
+            ShowDetails();
         }
         
         //Calculate age
