@@ -31,5 +31,18 @@ namespace Simulacro_C_.models
             DrivingExperience += years;
         }
 
+        // Muestra los detalles del conductor en formato tabular
+        public override void GetDetails()
+        {
+            Console.WriteLine($"{Name,-10}|{LastName,-10}|{TypeDocument,-12}|{IdentificationNumber,-12}|{Birthdate,-12}|{Email,-30}|{PhoneNumber,-12}|{Address,-20}|{LicenseNumnber,-15}|{LicenseCategory,-17}|{DrivingExperience,-17}|");
+        }
+
+        //Obtiene los años de experiencia del conductor
+        // Obtiene el salario del profesor
+        public double GetDrivingExperience()
+        {
+            return DrivingExperience;
+        }
+
     }
 }

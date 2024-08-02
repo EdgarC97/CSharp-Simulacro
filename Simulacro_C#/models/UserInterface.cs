@@ -39,17 +39,35 @@ namespace Simulacro_C_.models
                     switch (choice)
                     {
                         case 1:
-                        //     AdministratorApp.ShowCustomers();
-                        //     break;
-                        // case 2:
-                        //     AdministratorApp.ShowDrivers();
-                        //     break;
-                        // case 3:
-                        //     AdministratorApp.UserMajorThan30();
-                        //     break;
-                        // case 4:
-                        //     AdministratorApp.OrderConductorsDescending();
-                        //     break;
+                            AdministratorApp.ShowCustomers();
+                            break;
+                        case 2:
+                            AdministratorApp.ShowDrivers();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            var driversOlderThan30 = AdministratorApp.GetDriverOlderThan30(AdministratorApp.Drivers);
+                            Console.WriteLine("Conductores mayores de 30 años:");
+                            foreach (var user in driversOlderThan30)
+                            {
+                                user.GetDetails();
+                            }
+                            var customersOlderThan30 = AdministratorApp.GetCustomerOlderThan30(AdministratorApp.Customers);
+                            Console.WriteLine("Clientes mayores de 30 años:");
+                            foreach (var user in customersOlderThan30)
+                            {
+                                user.GetDetails();
+                            }
+                            break;
+                        case 4:
+                            Console.Clear();
+                            var driversOrderedByExpDesc = AdministratorApp.GetTeachersOrderedBySalaryDesc(AdministratorApp.Drivers);
+                            Console.WriteLine("\nConductores ordenados por experiencia descendente:\n");
+                            foreach (var driver in driversOrderedByExpDesc)
+                            {
+                                driver.GetDetails();
+                            }
+                            break;
                         // case 5:
                         //     AdministratorApp.FindCreditCardCustomers();
                         //     break;

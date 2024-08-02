@@ -33,18 +33,28 @@ namespace Simulacro_C_.models
         //Show details
         protected void ShowDetails()
         {
-            Console.WriteLine($"\nName: {Name}\nLast Name: {LastName}\nDocument Type: {TypeDocument}\nDocument Number: {IdentificationNumber}\nBirthdate: {Birthdate}\nEmail Address: {Email}\nPhone Number: {PhoneNumber}\nAddress: {Address}");
+            Console.WriteLine($"\nName: {Name}\nLast Name: {LastName}\nDocument Type: {TypeDocument}\nDocument Number: {IdentificationNumber}\nBirthdate: {Birthdate}\nEmail: {Email}\nPhone Number: {PhoneNumber}\nAddress: {Address}");
         }
         //Obtener details
         public virtual void GetDetails()
         {
             ShowDetails();
         }
-        
+
         //Calculate age
         protected int CalculateAge()
         {
-            return DateTime.Today.Year - Birthdate.Year;
+            int age = DateTime.Today.Year - Birthdate.Year;
+            if (DateTime.Today.Month < Birthdate.Month || (DateTime.Today.Month == Birthdate.Month && DateTime.Today.Day < Birthdate.Day))
+            {
+                age--;
+            }
+            return age;
+        }
+        //Get age
+        public int GetAge()
+        {
+            return CalculateAge();
         }
 
         //Show age
