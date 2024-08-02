@@ -43,7 +43,12 @@ namespace Simulacro_C_.models
             new Customer(
             "Joseph", "Stanlin", "DNI", "087654321",
             new DateOnly(2000, 2, 2),"joseph.stanlin@email.com","3017448969",
-            "Calle falsa 567","Premiun","Credit Card")
+            "Calle falsa 567","Premiun","Credit Card"),
+
+            new Customer(
+            "Adolf", "Hitler", "DNI", "187654321",
+            new DateOnly(1950, 2, 2),"adolf.hitler@email.com","3027448969",
+            "Calle falsa 000","Elite","Credit Card")
         };
         //Lista de vehiculos inicial
         public static List<Vehicle> Vehicles = new List<Vehicle>
@@ -85,7 +90,7 @@ namespace Simulacro_C_.models
             Console.WriteLine(new string('-', 178));
         }
 
-        //Metodo para mostrar a usuario mayores de 30 años
+        //Metodos para mostrar a usuarios mayores de 30 años
         public static List<Driver> GetDriverOlderThan30(List<Driver> Drivers)
         {
             return Drivers.Where(s => s.GetAge() > 30).ToList();
@@ -95,10 +100,22 @@ namespace Simulacro_C_.models
             return Customers.Where(s => s.GetAge() > 30).ToList();
         }
 
-        ////Metodo para mostrar a conductor por su experiencia en orden descendente
+        //Metodo para mostrar a conductor por su experiencia en orden descendente
         public static List<Driver> GetTeachersOrderedBySalaryDesc(List<Driver> Drivers)
         {
             return Drivers.OrderByDescending(t => t.GetDrivingExperience()).ToList();
+        }
+
+        //Metodo para encontrar Clientes que prefieren pagar con tarjeta de credito
+        public static List<Customer> GetCustomersForCreditCard(List<Customer> Customers)
+        {
+            return Customers.Where(t => t.PreferrePaymentMethod?.Equals("Credit Card", StringComparison.OrdinalIgnoreCase) == true).ToList();
+        }
+
+        //Metodo para encontrar conductores con licencia 'A2'
+        public static List<Driver> ShowDriversWithA2(List<Driver> Drivers)
+        {
+            return Drivers.Where(d => d.LicenseCategory?.Equals("A2", StringComparison.OrdinalIgnoreCase) == true).ToList();
         }
     }
 }

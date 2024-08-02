@@ -47,13 +47,18 @@ namespace Simulacro_C_.models
                         case 3:
                             Console.Clear();
                             var driversOlderThan30 = AdministratorApp.GetDriverOlderThan30(AdministratorApp.Drivers);
-                            Console.WriteLine("Conductores mayores de 30 años:");
+                            Console.WriteLine("\n=== Conductores mayores de 30 años ===\n");
+                            Console.WriteLine($"{"Nombre",-10}|{"Apellido",-10}|{"Tipo Doc.",-12}|{"Número Doc.",-12}|{"Cumpleaños",-12}|{"Email",-30}|{"Teléfono",-12}|{"Direccion",-20}|{"Num de licencia",-15}|{"Tipo de licencia",-17}|{"Experiencia(años)",-17}|");
+                            Console.WriteLine(new string('-', 178));
                             foreach (var user in driversOlderThan30)
                             {
                                 user.GetDetails();
                             }
                             var customersOlderThan30 = AdministratorApp.GetCustomerOlderThan30(AdministratorApp.Customers);
-                            Console.WriteLine("Clientes mayores de 30 años:");
+                            Console.WriteLine("\n=== Clientes mayores de 30 años ===\n");
+                            Console.WriteLine($"{"Nombre",-10}|{"Apellido",-10}|{"Tipo Doc.",-12}|{"Número Doc.",-12}|{"Cumpleaños",-12}|{"Email",-30}|{"Teléfono",-12}|{"Direccion",-20}|{"Membership Level",-16}|{"Metodo de pago",-15}|");
+                            Console.WriteLine(new string('-', 159));
+
                             foreach (var user in customersOlderThan30)
                             {
                                 user.GetDetails();
@@ -62,18 +67,39 @@ namespace Simulacro_C_.models
                         case 4:
                             Console.Clear();
                             var driversOrderedByExpDesc = AdministratorApp.GetTeachersOrderedBySalaryDesc(AdministratorApp.Drivers);
-                            Console.WriteLine("\nConductores ordenados por experiencia descendente:\n");
+                            Console.WriteLine("\n=== Conductores ordenados por experiencia descendente ===\n");
+                            Console.WriteLine($"{"Nombre",-10}|{"Apellido",-10}|{"Tipo Doc.",-12}|{"Número Doc.",-12}|{"Cumpleaños",-12}|{"Email",-30}|{"Teléfono",-12}|{"Direccion",-20}|{"Num de licencia",-15}|{"Tipo de licencia",-17}|{"Experiencia(años)",-17}|");
+                            Console.WriteLine(new string('-', 178));
+                            
                             foreach (var driver in driversOrderedByExpDesc)
                             {
                                 driver.GetDetails();
                             }
                             break;
-                        // case 5:
-                        //     AdministratorApp.FindCreditCardCustomers();
-                        //     break;
-                        // case 6:
-                        //     AdministratorApp.ShowDriversWithA2();
-                        //     break;
+                        case 5:
+                            Console.Clear();
+                            var customersForCreditCard = AdministratorApp.GetCustomersForCreditCard(AdministratorApp.Customers);
+                            Console.WriteLine("\n=== Clientes que usan 'Credit Card' ===\n");
+                            Console.WriteLine($"{"Nombre",-10}|{"Apellido",-10}|{"Tipo Doc.",-12}|{"Número Doc.",-12}|{"Cumpleaños",-12}|{"Email",-30}|{"Teléfono",-12}|{"Direccion",-20}|{"Membership Level",-16}|{"Metodo de pago",-15}|");
+                            Console.WriteLine(new string('-', 159));
+                            foreach (var customer in customersForCreditCard)
+                            {
+                                customer.GetDetails();
+                            }
+                            break;
+                        case 6:
+                            Console.Clear();
+                            var driversForA2 = AdministratorApp.
+                            ShowDriversWithA2(AdministratorApp.Drivers);
+                            Console.WriteLine("\n=== Conductores con licencia 'A2' ===\n");
+                            Console.WriteLine($"{"Nombre",-10}|{"Apellido",-10}|{"Tipo Doc.",-12}|{"Número Doc.",-12}|{"Cumpleaños",-12}|{"Email",-30}|{"Teléfono",-12}|{"Direccion",-20}|{"Num de licencia",-15}|{"Tipo de licencia",-17}|{"Experiencia(años)",-17}|");
+                            Console.WriteLine(new string('-', 178));
+                            foreach (var driver in driversForA2)
+                            {
+                                driver.GetDetails();
+                            }
+                            break;
+
                         case 7:
                             exit = true; // Establezco la bandera exit a true para salir del bucle
                             Console.WriteLine("Gracias por usar el Sistema de Gestión de Escuela. ¡Hasta luego!");
