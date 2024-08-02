@@ -11,12 +11,12 @@ namespace Simulacro_C_.models
         public string? PreferrePaymentMethod { get; set; }
 
         //Constructor
-        public Customer(string membershipLevel, string preferrePaymentMethod,string name, string lastName, string typeDocument, string identificationNumber, DateOnly birthday, string email, string phoneNumber, string address) : base (name,lastName,typeDocument, identificationNumber, birthday, email, phoneNumber, address)
+        public Customer(string name, string lastName, string typeDocument, string identificationNumber, DateOnly birthday, string email, string phoneNumber, string address, string membershipLevel, string preferrePaymentMethod) : base(name, lastName, typeDocument, identificationNumber, birthday, email, phoneNumber, address)
         {
             MembershipLevel = membershipLevel;
             PreferrePaymentMethod = preferrePaymentMethod;
         }
-        
+
         //UpdateMemberShip
         public void UpdateMembership()
         {

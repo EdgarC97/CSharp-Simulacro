@@ -16,7 +16,7 @@ namespace Simulacro_C_.models
         public Driver? Owner { get; set; }
 
         //Constructor
-        public Vehicle(int id, string plate, string type, string engineNumber, string serialNumber, byte peopleCapacity, Driver owner)
+        public Vehicle(int id, string plate, string type, string engineNumber, string serialNumber, byte peopleCapacity)
         {
             Id = id;
             Plate = plate;
@@ -24,7 +24,6 @@ namespace Simulacro_C_.models
             EngineNumber = engineNumber;
             SerialNumber = serialNumber;
             PeopleCapacity = peopleCapacity;
-            Owner = owner;
         }
 
         //DeleteVehicle
