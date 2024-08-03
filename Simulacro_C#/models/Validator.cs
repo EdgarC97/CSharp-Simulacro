@@ -64,7 +64,7 @@ namespace Simulacro_C_.models
         public static void ValidateSearchTerm(string term, string fieldName)
         {
             if (string.IsNullOrWhiteSpace(term))
-                throw new ArgumentException($"El {fieldName} de búsqueda no puede estar vacío.");
+                throw new ArgumentException($"El {fieldName} no puede estar vacío.");
         }
 
         // Método para obtener y validar el id desde la entrada del usuario

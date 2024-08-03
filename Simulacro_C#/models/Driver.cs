@@ -45,7 +45,6 @@ namespace Simulacro_C_.models
         }
 
         //Obtiene los años de experiencia del conductor
-        // Obtiene el salario del profesor
         public double GetDrivingExperience()
         {
             return DrivingExperience;

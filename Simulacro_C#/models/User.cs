@@ -34,6 +34,10 @@ namespace Simulacro_C_.models
         {
             return Name;
         }
+        public string? GetLastName()
+        {
+            return LastName;
+        }
 
         //Show details
         protected void ShowDetails()

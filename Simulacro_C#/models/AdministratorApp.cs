@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Simulacro_C_.models
 {
-    public  static class AdministratorApp
+    public static class AdministratorApp
     {
         //Lista de usuarios
         public static List<User> Users = new List<User>();
@@ -118,16 +118,6 @@ namespace Simulacro_C_.models
             return Drivers.Where(d => d.LicenseCategory?.Equals("A2", StringComparison.OrdinalIgnoreCase) == true).ToList();
         }
 
-        //Metodo para agregar un vehiculo
-        public static void AddEmployee(Vehicle vehicle)
-        {
-            // Validar el objeto Employee
-            Validator.ValidateVehicle(vehicle);
-
-            // Agregar el libro a la colección
-            Vehicles.Add(vehicle);
-        }
-
         public static void AddVehicle(Vehicle vehicle)
         {
             // Validar el objeto Vehicle
@@ -141,41 +131,35 @@ namespace Simulacro_C_.models
         public static void AddVehicleFromUserInput()
         {
             Console.Clear();
-            Console.WriteLine("\n=== Agregar Vehiculo ===");
+            Console.WriteLine("\n=== Agregar Vehículo ===");
 
             int id = Validator.GetValidIdFromUserInput();
             string plate = Validator.GetValidPlateFromUserInput();
-            string type = Validator.GetValidTypeFromUserInput();
+            string type = GetValidVehicleTypeFromUserInput();
             string engineNumber = Validator.GetValidEngineNumberFromUserInput();
             string serialNumber = Validator.GetValidSerialNumberFromUserInput();
-            byte peopleCapacity = Validator.GetValidPeopleCapacityFromUserInput();
+            byte peopleCapacity = GetValidPeopleCapacityForVehicleType(type);
             Driver owner = GetValidDriverFromUserInput();
 
-            // Creamos un nuevo vehículo con los datos validados
-            Vehicle newVehicle = new Vehicle(id, plate, type, engineNumber, serialNumber, peopleCapacity, owner);
-
-            // Agregamos el vehículo a la lista si pasa las validaciones
-            AddVehicle(newVehicle);
-            Console.WriteLine("Vehículo agregado exitosamente.");
-
-            // Asignamos el vehículo al conductor
-            owner.AssignVehicle(newVehicle);
-            Console.WriteLine($"Vehículo asignado al conductor {owner.GetName()}.");
-        }
-        private static Driver GetValidDriverFromUserInput()
-        {
-            while (true)
+            try
             {
-                Console.Write("Nombre del conductor: ");
-                string driverName = Console.ReadLine() ?? "";
-                Driver? driver = Drivers.FirstOrDefault(d => d.GetName().Equals(driverName, StringComparison.OrdinalIgnoreCase));
-                if (driver != null)
-                {
-                    return driver;
-                }
-                Console.WriteLine("Conductor no encontrado. Por favor, intente de nuevo.");
+                // Creamos un nuevo vehículo con los datos validados
+                Vehicle newVehicle = new Vehicle(id, plate, type, engineNumber, serialNumber, peopleCapacity, owner);
+
+                // Agregamos el vehículo a la lista
+                Vehicles.Add(newVehicle);
+                Console.WriteLine("\nVehículo agregado exitosamente.");
+
+                // Asignamos el vehículo al conductor
+                owner.AssignVehicle(newVehicle);
+                Console.WriteLine($"\nVehículo asignado al conductor {owner.GetName()}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Error al crear el vehículo: {ex.Message}");
             }
         }
+
         private static string GetValidVehicleTypeFromUserInput()
         {
             while (true)
@@ -202,7 +186,7 @@ namespace Simulacro_C_.models
                 "moto" => 2,
                 "carro" => 5,
                 "camioneta" => 8,
-                "microbus" => 30,
+                "microbus" => 10,
                 _ => throw new ArgumentException("Tipo de vehículo no válido")
             };
 
@@ -215,6 +199,38 @@ namespace Simulacro_C_.models
                 }
                 Console.WriteLine($"Capacidad no válida. Debe ser un número entre 1 y {maxCapacity}.");
             }
+        }
+
+        private static Driver GetValidDriverFromUserInput()
+        {
+            while (true)
+            {
+                Console.Write("Nombre del conductor: ");
+                string driverName = Console.ReadLine() ?? "";
+
+                Driver? driver = Drivers.FirstOrDefault(d => d.GetName() != null && d.GetName().Equals(driverName, StringComparison.OrdinalIgnoreCase));
+                if (driver != null)
+                {
+                    return driver;
+                }
+                Console.WriteLine("Conductor no encontrado. Por favor, intente de nuevo.");
+            }
+        }
+        //Metodo para mostrar nuevos vehiculos con sus respectivos conducrores
+        public static void ShowVehiclesWithDrivers()
+        {
+            Console.Clear();
+            Console.WriteLine("\n=== Vehículos y sus Conductores Asignados ===\n");
+            Console.WriteLine($"{"ID",-5}|{"Placa",-10}|{"Tipo",-10}|{"Capacidad",-10}|{"Nº Motor",-15}|{"Nº Serie",-15}|{"Conductor",-15}|");
+            Console.WriteLine(new string('-', 87));
+
+            foreach (var vehicle in Vehicles)
+            {
+                string driverName = vehicle.Owner != null ? $"{vehicle.Owner.GetName()} {vehicle.Owner.GetLastName()}" : "No asignado";
+                Console.WriteLine($"{vehicle.Id,-5}|{vehicle.Plate,-10}|{vehicle.Type,-10}|{vehicle.PeopleCapacity,-10}|{vehicle.EngineNumber,-15}|{vehicle.SerialNumber,-15}|{driverName,-15}|");
+            }
+
+            Console.WriteLine(new string('-', 87));
         }
     }
 }

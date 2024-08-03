@@ -23,7 +23,8 @@ namespace Simulacro_C_.models
                 Console.WriteLine("5. Encontrar clientes con metodo de pago: Tarjeta de credito");
                 Console.WriteLine("6. Listar conductores con licencia de categoria : A2");
                 Console.WriteLine("7. Agregar un vehiculo");
-                Console.WriteLine("8. Salir");
+                Console.WriteLine("8. Mostrar vehículos y conductores asignados");
+                Console.WriteLine("9. Salir");
                 Console.Write("Seleccione una opción: ");
 
                 // Leo la opción ingresada por el usuario y valida que sea un número
@@ -104,8 +105,11 @@ namespace Simulacro_C_.models
                             AdministratorApp.AddVehicleFromUserInput();
                             break;
                         case 8:
+                            AdministratorApp.ShowVehiclesWithDrivers();
+                            break;
+                        case 9:
                             exit = true; // Establezco la bandera exit a true para salir del bucle
-                            Console.WriteLine("Gracias por usar el Sistema de Gestión de Escuela. ¡Hasta luego!");
+                            Console.WriteLine("Gracias por usar el Sistema de Transporte de Riwi. ¡Hasta luego!");
                             break;
                         default:
                             Console.WriteLine("Opción no válida. Por favor, intente de nuevo."); // Mensaje para opciones no válidas
