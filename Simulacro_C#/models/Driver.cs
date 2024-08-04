@@ -10,8 +10,9 @@ namespace Simulacro_C_.models
         public string? LicenseNumnber { get; set; }
         public string? LicenseCategory { get; set; }
         public int DrivingExperience { get; set; }
-
-        //Constructor
+        public List<Vehicle> AssignedVehicles { get; set; } = new List<Vehicle>();
+        
+        //Constructor completo
         public Driver(string name, string lastName, string typeDocument, string identificationNumber, DateOnly birthday, string email, string phoneNumber, string address, string licenseNumber, string licenseCategory, int drivingExperience) : base(name, lastName, typeDocument, identificationNumber, birthday, email, phoneNumber, address)
         {
             LicenseNumnber = licenseNumber;
@@ -19,23 +20,16 @@ namespace Simulacro_C_.models
             DrivingExperience = drivingExperience;
         }
 
-        public List<Vehicle> AssignedVehicles { get; set; } = new List<Vehicle>();
-
+        //Metodo para asignar un nuevo vehiculo al conductor
         public void AssignVehicle(Vehicle vehicle)
         {
             AssignedVehicles.Add(vehicle);
         }
 
-        //UpdateLicenseCategory
+        //Metodo para actualizar la categoria de la licencia
         public void UpdateLicenseCategory(string newLicenseCategory)
         {
-            LicenseCategory = newLicenseCategory;
-        }
-
-        //AddExperience
-        public void AddExperience(int years)
-        {
-            DrivingExperience += years;
+            LicenseCategory = newLicenseCategory;   
         }
 
         // Muestra los detalles del conductor en formato tabular
